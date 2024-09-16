@@ -226,22 +226,27 @@ class BackgroundLocationService: MethodChannel.MethodCallHandler, PluginRegistry
      * Depending on the current activity, displays a rationale for the request.
      */
     private fun requestPermissions() {
-        if(activity == null) {
-            return
-        }
-
-        val shouldProvideRationale = ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.ACCESS_FINE_LOCATION)
-        if (shouldProvideRationale) {
-            Log.i(BackgroundLocationPlugin.TAG, "Displaying permission rationale to provide additional context.")
-            Toast.makeText(context, R.string.permission_rationale, Toast.LENGTH_LONG).show()
-
-        } else {
-            Log.i(BackgroundLocationPlugin.TAG, "Requesting permission")
-            ActivityCompat.requestPermissions(activity!!,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.FOREGROUND_SERVICE,
-                        Manifest.permission.FOREGROUND_SERVICE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION),
-                    REQUEST_PERMISSIONS_REQUEST_CODE)
-        }
+//        if(activity == null) {
+//            return
+//        }
+//
+//        val shouldProvideRationale = ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.ACCESS_FINE_LOCATION)
+//        if (shouldProvideRationale) {
+//            Log.i(BackgroundLocationPlugin.TAG, "Displaying permission rationale to provide additional context.")
+//            Toast.makeText(context, R.string.permission_rationale, Toast.LENGTH_LONG).show()
+//
+//        } else {
+//            Log.i(BackgroundLocationPlugin.TAG, "Requesting permission")
+//            ActivityCompat.requestPermissions(activity!!,
+//                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.FOREGROUND_SERVICE,
+//                        Manifest.permission.FOREGROUND_SERVICE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION),
+//                    REQUEST_PERMISSIONS_REQUEST_CODE)
+//        }
+        Log.i(BackgroundLocationPlugin.TAG, "Requesting permission")
+        ActivityCompat.requestPermissions(activity!!,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.FOREGROUND_SERVICE,
+                Manifest.permission.FOREGROUND_SERVICE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION),
+            REQUEST_PERMISSIONS_REQUEST_CODE)
     }
 
     private inner class MyReceiver : BroadcastReceiver() {
