@@ -192,7 +192,9 @@ class BackgroundLocationService: MethodChannel.MethodCallHandler, PluginRegistry
      * Checks the current permission for `ACCESS_FINE_LOCATION`
      */
     private fun checkPermissions(): Boolean {
-        return PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(context!!, Manifest.permission.ACCESS_FINE_LOCATION)
+        val permissionState = checkLocationPermissionIsGiven()
+        Log.i(BackgroundLocationPlugin.TAG, "Permission state: $permissionState")
+        return permissionState();
     }
 
     private fun checkLocationPermissionIsGiven(): Boolean {
