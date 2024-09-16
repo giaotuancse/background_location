@@ -237,7 +237,7 @@ class BackgroundLocationService: MethodChannel.MethodCallHandler, PluginRegistry
             Log.i(BackgroundLocationPlugin.TAG, "Requesting permission")
             ActivityCompat.requestPermissions(activity!!,
                     arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.FOREGROUND_SERVICE,
-                        Manifest.permission.FOREGROUND_SERVICE_LOCATION),
+                        Manifest.permission.FOREGROUND_SERVICE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION),
                     REQUEST_PERMISSIONS_REQUEST_CODE)
         }
     }
