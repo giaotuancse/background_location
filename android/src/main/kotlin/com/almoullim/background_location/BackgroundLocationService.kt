@@ -193,7 +193,7 @@ class BackgroundLocationService: MethodChannel.MethodCallHandler, PluginRegistry
      */
     private fun checkPermissions(): Boolean {
         val permissionState = checkLocationPermissionIsGiven()
-        Log.i(BackgroundLocationPlugin.TAG, "Permission state: $permissionState")
+        Log.i("Permission state:", permissionState)
         return permissionState();
     }
 
