@@ -8,8 +8,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.ServiceInfo
 import android.os.*
+import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.core.app.ServiceCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.location.*
 import com.google.android.gms.location.LocationRequest
@@ -171,10 +174,18 @@ class LocationUpdatesService : Service() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     fun updateNotification() {
         if (!isStarted) {
             isStarted = true
-            startForeground(NOTIFICATION_ID, notification.build())
+            val notification = NotificationCompat.Builder(this, CHANNEL_ID)
+                // Create the notification to display while the service is running
+                .build()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForeground(NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION)
+            } else {
+                startForeground(NOTIFICATION_ID, notification)
+            }
         } else {
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.notify(NOTIFICATION_ID, notification.build())
